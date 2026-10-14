@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-14",
+  "compiler": "Codex built-in LaTeX compiler",
+  "status": "unavailable",
+  "message": "Finish Windows sandbox setup in Codex Settings before compiling LaTeX",
+  "pdfGenerated": false,
+  "pageCountVerified": false
+}

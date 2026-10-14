@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-14",
+  "execution": "Node ESM imports: runTests() and runPilot(outputDir)",
+  "scope": "Source identity for deterministic Boolean-circuit pilot; no LLM/EDA/PPA measurements",
+  "files": [
+    {
+      "path": "src/checker.mjs",
+      "bytes": 17580,
+      "sha256": "e41c02c9af12b6f0e87b8b5ee43f6562a495e2d8abe2de66ee47e16ea5beab6c"
+    },
+    {
+      "path": "src/pilot_cases.mjs",
+      "bytes": 3806,
+      "sha256": "5f70094f7e320ac871956ab73c78e817bf8875391860fb90eb2500e93683179c"
+    },
+    {
+      "path": "src/run_pilot.mjs",
+      "bytes": 6272,
+      "sha256": "4644f30ae406cc690f8922fe335385c165a05192f4c6262429d3c33d6f52394c"
+    },
+    {
+      "path": "src/verify_candidate.mjs",
+      "bytes": 1957,
+      "sha256": "4176c89a77091b1b37d9c957f32f69826b9f6fc682d807b87973f75ff3ad0417"
+    },
+    {
+      "path": "tests/checker.test.mjs",
+      "bytes": 15487,
+      "sha256": "82df4e8f88c05ae75272dfface2a8816416f2e62a195aa1bbb6fcca9717021d1"
+    },
+    {
+      "path": "examples/conditional-mux.json",
+      "bytes": 540,
+      "sha256": "681b8e9c5cec636631952de05ecdf35a49ba0a4c17fd98a24fe2837a5dda53fb"
+    },
+    {
+      "path": "examples/deployment_examples.mjs",
+      "bytes": 1840,
+      "sha256": "f58b5c06011956c8bea68af815ab9d78252541e5150366c14c8b3de38928c5cc"
+    },
+    {
+      "path": "examples/environment-safe.json",
+      "bytes": 332,
+      "sha256": "4ecc6cc8f15e992da754c4eec9f8926be33a05e17dd9017adc09f31573dbc14a"
+    },
+    {
+      "path": "examples/environment-unsafe.json",
+      "bytes": 330,
+      "sha256": "510d954ffaf4e4f59b07fdbdddd1a5421394fb37044c31100dd897e75906d21a"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "absorption_01",
+  "proposer": "deterministic-pilot",
+  "inputs": [
+    "a",
+    "b",
+    "c",
+    "s"
+  ],
+  "reference": {
+    "y": {
+      "op": "or",
+      "left": {
+        "op": "input",
+        "name": "a"
+      },
+      "right": {
+        "op": "and",
+        "left": {
+          "op": "input",
+          "name": "a"
+        },
+        "right": {
+          "op": "input",
+          "name": "b"
+        }
+      }
+    }
+  },
+  "candidate": {
+    "y": {
+      "op": "input",
+      "name": "a"
+    }
+  }
+}

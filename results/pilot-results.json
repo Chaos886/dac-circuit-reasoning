@@ -1,0 +1,1524 @@
+{
+  "schemaVersion": 1,
+  "title": "Deterministic Boolean-circuit sanity pilot",
+  "proposer": "deterministic-pilot",
+  "semantics": "two-state-combinational",
+  "evidenceScope": "hand-constructed correctness probes, not an independent evaluation benchmark",
+  "limits": {
+    "maxInputs": 16,
+    "maxAssignments": 65536,
+    "maxAstNodes": 10000,
+    "maxAstDepth": 64,
+    "maxEvaluationSteps": 20000000
+  },
+  "summary": {
+    "cases": 27,
+    "verified": 21,
+    "rejected": 6,
+    "inconclusive": 0,
+    "expectedStatusMatches": 27,
+    "assignmentsChecked": 412,
+    "validAssignments": 368,
+    "verifiedReferenceUniqueLogicGates": 51,
+    "verifiedCandidateUniqueLogicGates": 17,
+    "verifiedReferenceDepthSum": 45,
+    "verifiedCandidateDepthSum": 15,
+    "deploymentExamples": 3,
+    "deploymentExpectedMatches": 3
+  },
+  "families": {
+    "absorption": {
+      "cases": 5,
+      "verified": 5,
+      "rejected": 0,
+      "expectedStatusMatches": 5
+    },
+    "distributivity": {
+      "cases": 5,
+      "verified": 5,
+      "rejected": 0,
+      "expectedStatusMatches": 5
+    },
+    "xor-cancellation": {
+      "cases": 5,
+      "verified": 5,
+      "rejected": 0,
+      "expectedStatusMatches": 5
+    },
+    "mux-under-contract": {
+      "cases": 5,
+      "verified": 5,
+      "rejected": 0,
+      "expectedStatusMatches": 5
+    },
+    "invalid-rewrite": {
+      "cases": 5,
+      "verified": 0,
+      "rejected": 5,
+      "expectedStatusMatches": 5
+    },
+    "multi-output": {
+      "cases": 2,
+      "verified": 1,
+      "rejected": 1,
+      "expectedStatusMatches": 2
+    }
+  },
+  "interpretation": [
+    "Counts come from exhaustive enumeration of these small supplied fixtures.",
+    "The proposer is a fixed collection of human-designed transformations, not a language model.",
+    "Gate counts structurally deduplicate identical ordered AST expressions across outputs.",
+    "Gate counts exclude input and constant nodes; each not/and/or/xor/mux is one abstract operation.",
+    "Depth counts AST logic levels with input and constant depth zero.",
+    "No standard-cell area, delay, power, routing, synthesis, or four-state HDL result is measured.",
+    "Deployment eligibility requires both non-vacuous local equivalence and the independent A(x) => C(B(x)) check.",
+    "The whole-circuit checks use explicitly supplied small ASTs, not automatic netlist extraction or rewriting."
+  ],
+  "results": [
+    {
+      "family": "absorption",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "absorption_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "absorption",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "absorption_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "absorption",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "absorption_03",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 160
+    },
+    {
+      "family": "absorption",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "absorption_04",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 208
+    },
+    {
+      "family": "absorption",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "absorption_05",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 208
+    },
+    {
+      "family": "distributivity",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "distributivity_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 208
+    },
+    {
+      "family": "distributivity",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "distributivity_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 208
+    },
+    {
+      "family": "distributivity",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "distributivity_03",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 4,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 3,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 256
+    },
+    {
+      "family": "distributivity",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "distributivity_04",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 4,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 3,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 240
+    },
+    {
+      "family": "distributivity",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "distributivity_05",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 4,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 3,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 304
+    },
+    {
+      "family": "xor-cancellation",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "xor_cancellation_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "xor-cancellation",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "xor_cancellation_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 80
+    },
+    {
+      "family": "xor-cancellation",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "xor_cancellation_03",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "xor-cancellation",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "xor_cancellation_04",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "xor-cancellation",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "xor_cancellation_05",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 3,
+          "outputDepths": {
+            "y": 3
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 176
+    },
+    {
+      "family": "mux-under-contract",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "mux_contract_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 8,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 96
+    },
+    {
+      "family": "mux-under-contract",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "mux_contract_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 8,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "mux-under-contract",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "mux_contract_03",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 8,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 144
+    },
+    {
+      "family": "mux-under-contract",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "mux_contract_04",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 8,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 160
+    },
+    {
+      "family": "mux-under-contract",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "mux_contract_05",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 4,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 160
+    },
+    {
+      "family": "invalid-rewrite",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "invalid_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": true,
+          "b": false,
+          "c": false,
+          "s": false
+        },
+        "referenceOutputs": {
+          "y": false
+        },
+        "candidateOutputs": {
+          "y": true
+        },
+        "mismatches": [
+          "y"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "invalid-rewrite",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "invalid_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": true,
+          "b": true,
+          "c": false,
+          "s": false
+        },
+        "referenceOutputs": {
+          "y": false
+        },
+        "candidateOutputs": {
+          "y": true
+        },
+        "mismatches": [
+          "y"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "invalid-rewrite",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "invalid_03",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": true,
+          "b": false,
+          "c": false,
+          "s": false
+        },
+        "referenceOutputs": {
+          "y": false
+        },
+        "candidateOutputs": {
+          "y": true
+        },
+        "mismatches": [
+          "y"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 96
+    },
+    {
+      "family": "invalid-rewrite",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "invalid_04",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": true,
+          "b": false,
+          "c": false,
+          "s": false
+        },
+        "referenceOutputs": {
+          "y": true
+        },
+        "candidateOutputs": {
+          "y": false
+        },
+        "mismatches": [
+          "y"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 112
+    },
+    {
+      "family": "invalid-rewrite",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "invalid_05",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 16,
+      "checkedAssignments": 16,
+      "validAssignments": 16,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": false,
+          "b": false,
+          "c": true,
+          "s": false
+        },
+        "referenceOutputs": {
+          "y": true
+        },
+        "candidateOutputs": {
+          "y": false
+        },
+        "mismatches": [
+          "y"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 2,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 176
+    },
+    {
+      "family": "multi-output",
+      "expectedStatus": "VERIFIED",
+      "schemaVersion": 1,
+      "id": "multi_output_01",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "VERIFIED",
+      "reason": "EQUIVALENT_UNDER_CONTRACT",
+      "totalAssignments": 8,
+      "checkedAssignments": 8,
+      "validAssignments": 8,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": null,
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 3,
+          "depth": 2,
+          "outputDepths": {
+            "y": 2,
+            "z": 1
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 0,
+            "z": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 120
+    },
+    {
+      "family": "multi-output",
+      "expectedStatus": "REJECTED",
+      "schemaVersion": 1,
+      "id": "multi_output_02",
+      "proposer": "deterministic-pilot",
+      "semantics": "two-state-combinational",
+      "verificationMethod": "bounded-exhaustive-enumeration",
+      "status": "REJECTED",
+      "reason": "OUTPUT_MISMATCH",
+      "totalAssignments": 4,
+      "checkedAssignments": 4,
+      "validAssignments": 4,
+      "validAssignmentsExhaustive": true,
+      "contractSatisfiable": true,
+      "enumerationComplete": true,
+      "counterexample": {
+        "assignment": {
+          "a": false,
+          "b": false
+        },
+        "referenceOutputs": {
+          "y": false,
+          "z": false
+        },
+        "candidateOutputs": {
+          "y": false,
+          "z": true
+        },
+        "mismatches": [
+          "z"
+        ]
+      },
+      "metrics": {
+        "interpretation": "abstract structural proxies only; not physical PPA",
+        "reference": {
+          "uniqueLogicGates": 0,
+          "depth": 0,
+          "outputDepths": {
+            "y": 0,
+            "z": 0
+          }
+        },
+        "candidate": {
+          "uniqueLogicGates": 1,
+          "depth": 1,
+          "outputDepths": {
+            "y": 0,
+            "z": 1
+          }
+        }
+      },
+      "conservativeEvaluationSteps": 24
+    }
+  ],
+  "deploymentResults": [
+    {
+      "id": "unsafe-boundary",
+      "expectedDeploymentEligible": false,
+      "schemaVersion": 1,
+      "semantics": "two-state-combinational",
+      "scope": "local replacement plus supplied boundary mapping and fixed external assumption",
+      "localVerified": true,
+      "environmentVerified": false,
+      "deploymentEligible": false,
+      "localVerification": {
+        "schemaVersion": 1,
+        "id": "mux-local-contract",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 8,
+        "checkedAssignments": 8,
+        "validAssignments": 4,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "y": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "environmentVerification": {
+        "obligation": "external-assumption-implies-local-contract",
+        "schemaVersion": 1,
+        "id": "environment-obligation",
+        "proposer": "environment-check",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "REJECTED",
+        "reason": "OUTPUT_MISMATCH",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 16,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": {
+          "assignment": {
+            "u": false,
+            "v": false,
+            "x": false,
+            "q": false
+          },
+          "referenceOutputs": {
+            "_contract_obligation": false
+          },
+          "candidateOutputs": {
+            "_contract_obligation": true
+          },
+          "mismatches": [
+            "_contract_obligation"
+          ]
+        },
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "wholeCircuitVerification": {
+        "schemaVersion": 1,
+        "id": "whole-unsafe",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "REJECTED",
+        "reason": "OUTPUT_MISMATCH",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 16,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": {
+          "assignment": {
+            "u": true,
+            "v": false,
+            "x": false,
+            "q": false
+          },
+          "referenceOutputs": {
+            "y": false
+          },
+          "candidateOutputs": {
+            "y": true
+          },
+          "mismatches": [
+            "y"
+          ]
+        },
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 2,
+            "depth": 2,
+            "outputDepths": {
+              "y": 2
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 160
+      }
+    },
+    {
+      "id": "constant-safe-boundary",
+      "expectedDeploymentEligible": true,
+      "schemaVersion": 1,
+      "semantics": "two-state-combinational",
+      "scope": "local replacement plus supplied boundary mapping and fixed external assumption",
+      "localVerified": true,
+      "environmentVerified": true,
+      "deploymentEligible": true,
+      "localVerification": {
+        "schemaVersion": 1,
+        "id": "mux-local-contract",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 8,
+        "checkedAssignments": 8,
+        "validAssignments": 4,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "y": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "environmentVerification": {
+        "obligation": "external-assumption-implies-local-contract",
+        "schemaVersion": 1,
+        "id": "environment-obligation",
+        "proposer": "environment-check",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 16,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "wholeCircuitVerification": {
+        "schemaVersion": 1,
+        "id": "whole-safe-constant",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 16,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 2,
+            "depth": 2,
+            "outputDepths": {
+              "y": 2
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 160
+      }
+    },
+    {
+      "id": "safe-under-fixed-assumption",
+      "expectedDeploymentEligible": true,
+      "schemaVersion": 1,
+      "semantics": "two-state-combinational",
+      "scope": "local replacement plus supplied boundary mapping and fixed external assumption",
+      "localVerified": true,
+      "environmentVerified": true,
+      "deploymentEligible": true,
+      "localVerification": {
+        "schemaVersion": 1,
+        "id": "mux-local-contract",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 8,
+        "checkedAssignments": 8,
+        "validAssignments": 4,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "y": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "environmentVerification": {
+        "obligation": "external-assumption-implies-local-contract",
+        "schemaVersion": 1,
+        "id": "environment-obligation",
+        "proposer": "environment-check",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 8,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 0,
+            "depth": 0,
+            "outputDepths": {
+              "_contract_obligation": 0
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 48
+      },
+      "wholeCircuitVerification": {
+        "schemaVersion": 1,
+        "id": "whole-safe-assumption",
+        "proposer": "deterministic-pilot",
+        "semantics": "two-state-combinational",
+        "verificationMethod": "bounded-exhaustive-enumeration",
+        "status": "VERIFIED",
+        "reason": "EQUIVALENT_UNDER_CONTRACT",
+        "totalAssignments": 16,
+        "checkedAssignments": 16,
+        "validAssignments": 8,
+        "validAssignmentsExhaustive": true,
+        "contractSatisfiable": true,
+        "enumerationComplete": true,
+        "counterexample": null,
+        "metrics": {
+          "interpretation": "abstract structural proxies only; not physical PPA",
+          "reference": {
+            "uniqueLogicGates": 2,
+            "depth": 2,
+            "outputDepths": {
+              "y": 2
+            }
+          },
+          "candidate": {
+            "uniqueLogicGates": 1,
+            "depth": 1,
+            "outputDepths": {
+              "y": 1
+            }
+          }
+        },
+        "conservativeEvaluationSteps": 160
+      }
+    }
+  ]
+}
