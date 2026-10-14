@@ -1,0 +1,14 @@
+{
+  "name": "dac-circuit-reasoning",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Research draft and bounded Boolean circuit verification pilot",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node tests/checker.test.mjs",
+    "pilot": "node src/run_pilot.mjs --out results"
+  }
+}
