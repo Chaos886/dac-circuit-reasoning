@@ -1,0 +1,149 @@
+# Contract-Aware Deductive Rewriting of Boolean Circuits with Verified Proposal Interfaces
+
+> DAC 2027 research draft — 14 October 2026. Pending human verification. No completed LLM optimization or PPA experiment is reported. Anonymous manuscript draft; do not submit without completing the evaluation and venue checks.
+
+## Abstract
+
+Large language models can propose circuit rewrites, but plausible reasoning does not establish functional correctness or useful optimization. We investigate a contract-aware interface that separates untrusted proposals from independently checked proof obligations. A replacement is accepted only when its local contract follows from a fixed, satisfiable environment and establishes equivalence on every contract-admissible cut assignment. We give a compositional soundness argument, specify a bounded exhaustive-checking prototype, and define an evaluation protocol against traditional synthesis and budget-matched search. This research draft reports no measured large-model or physical-design advantage. Establishing whether explicit contracts improve optimization under equal verification budgets remains the central empirical question.
+
+## 1. Introduction
+
+Circuit optimization repeatedly replaces a subnetwork with a cheaper implementation while preserving observable behavior. A local rewrite can exploit relationships among its inputs, including correlations introduced by upstream logic. Such relationships create useful care sets, but also a correctness boundary: a replacement valid under an attractive assumption can be wrong for the actual design. Natural-language explanations and executable candidate code do not close that boundary.
+
+Large language models (LLMs) offer a flexible proposal mechanism. They may recognize mux structure, suggest algebraic identities, or compress a context into a small Boolean contract. Their practical value depends on both correctness checking and search efficiency. A solver can reject a wrong replacement, yet an interface that permits a proposer to invent its own assumptions can accidentally certify a different problem. For example, proving a mux equivalent to one data input under a chosen selector value is easy; proving that the selector always has that value is a separate obligation.
+
+We study an interface in which the environment remains immutable, the model proposes both a replacement and an explicit cut contract, and a trusted checker independently validates their connection. The hypothesis is that compact contracts could guide proposals toward useful conditional identities and reduce wasted search. This is a hypothesis about optimization efficiency, not a new principle of formal verification. Contract reasoning, observability and satisfiability don't-cares, technology-independent rewriting, and counterexample-guided search provide substantial prior foundations.
+
+Recent systems already study model-guided RTL optimization with tool feedback and cost control [1], [2], and benchmark design remains a distinct research concern [3]. Strong synthesis tools such as Yosys [4] and ABC [5] therefore belong in the comparison from the outset.
+
+The draft makes three scoped contributions. First, it states the exact proof obligations and a short compositional soundness argument for combinational two-state circuits. Second, it specifies a strict proposal boundary and a bounded exhaustive-checking pilot that can expose assumption contamination. Third, it defines a reproducible, budget-matched study capable of falsifying the claimed benefit of contracts. At present, there are no completed LLM optimization experiments, technology-mapped results, or claims of superiority over existing synthesis. The paper remains a research draft pending implementation audit, literature verification, experiments, and human review.
+
+## 2. Problem and Trust Boundary
+
+Let $x \in \{0,1\}^{n}$ denote primary inputs and let $A(x)$ be a fixed legal-environment predicate. We require $A$ to be satisfiable. In the absence of an independently justified restriction, $A(x)=1$. The design is a finite, acyclic, combinational Boolean network with deterministic two-state semantics. Sequential state, timing semantics, undefined values, and four-state HDL simulation are outside this model.
+
+Choose a cut with input vector $u=B(x)$ and local output vector $v=F(u)$. Represent the surrounding design by $H$, so that
+$$
+N(x)=H(x,F(B(x))).
+$$
+Here $H$ includes all downstream uses of the replaced outputs; those outputs must have no additional hidden consumers outside the represented context. A candidate replaces $F$ by $F'$ while preserving the cut interface:
+$$
+N'(x)=H(x,F'(B(x))).
+$$
+The proposal additionally supplies a Boolean contract $C(u)$. Its intended meaning is an overapproximation of cut assignments reachable under the legal environment. Define
+$$
+R_A=\{B(x)\mid A(x)=1\}.
+$$
+A sound contract contains $R_A$; it need not characterize this set exactly. Both $F'$ and $C$ may depend only on declared cut inputs. Candidate-provided primary inputs, free symbols, hidden state, and changes to $A$ are invalid.
+
+The trusted base consists of the original design and environment, cut extraction, parser, Boolean evaluator or solver, and acceptance logic. The proposer, its reasoning text, its claimed proof, and its cost estimate are untrusted. A candidate cannot certify the provenance of an environmental restriction by repeating it in its own output. Every nontrivial $A$ therefore needs an auditable origin in the design specification or a separate proved invariant; the present prototype does not infer such invariants or automatically extract and replace cuts in arbitrary HDL.
+
+## 3. Soundness and Assumption Contamination
+
+Two obligations connect a proposal to the original problem:
+$$
+\forall x,\quad A(x)\Rightarrow C(B(x)),
+\tag{1}
+$$
+$$
+\forall u,\quad C(u)\Rightarrow F(u)=F'(u).
+\tag{2}
+$$
+Equality is componentwise for vector outputs. Obligation (1) establishes environment coverage; obligation (2) establishes local equivalence on the covered domain.
+
+**Theorem 1 (sufficient condition).** If $A$ is satisfiable and obligations (1) and (2) hold for the fixed decomposition above, then $N(x)=N'(x)$ for every $x$ satisfying $A(x)$.
+
+**Proof.** Fix any legal $x$. By (1), $C(B(x))$ holds. Applying (2) to $u=B(x)$ gives $F(B(x))=F'(B(x))$. Determinism and substitutivity of $H$ yield $H(x,F(B(x)))=H(x,F'(B(x)))$, which is precisely the desired equality. This argument applies to each legal input. The satisfiability requirement prevents an empty environment from producing a vacuous certification. $\square$
+
+Checking only that $C$ is satisfiable does not establish (1). Take $F(s,a,b)=\operatorname{mux}(s,a,b)$, with output $a$ when $s=1$, and propose $F'=a$ and $C=(s=1)$. Local equivalence holds and $C$ is satisfiable. With $A=1$, however, the input $(s,a,b)=(0,0,1)$ produces original output 1 and replacement output 0. Coverage fails, so the candidate must be rejected. If a trusted upstream construction instead proves $s=1$, the same rewrite becomes valid.
+
+For contrast, let two cut inputs satisfy $u_2=\neg u_1$ by construction. Then $C(u)=(u_2=\neg u_1)$ covers every reachable cut assignment, allowing $F(u)=u_1\land u_2$ to become 0. This uses an actual correlation rather than an assumed one.
+
+The theorem is sufficient, not necessary, for global equivalence: $H$ can mask a local difference. The proposed interface intentionally requires local equivalence; it does not claim completeness for all context-dependent rewrites. A contract does not expand the semantic freedom already provided by the reachable care set. Its potential contribution is an explicit, checkable search representation.
+
+## 4. Verified Proposal Interface
+
+The proposed pipeline fixes the design, environment, cut, cost convention, and experiment budget before invoking a proposer. The proposer returns a structured replacement expression and contract. A strict JSON/abstract-syntax-tree boundary admits only enumerated Boolean operators, declared variables, and correctly typed fields. Free-form code execution is unnecessary. The prototype accepts a combined request envelope; a trusted caller must pin its reference and interface and expose only the replacement and contract to a future model adapter. The implementation must bound input arity and expression complexity and must record schema violations distinctly from failed semantic obligations.
+
+An accepted schema is only the beginning of checking. First, the checker establishes that the trusted environment is nonempty. Second, it checks coverage independently of the replacement. Third, it checks conditional equivalence independently of any claimed proof text. In a SAT implementation, the corresponding queries are
+$$
+Q_A=A(x),\qquad Q_{\mathrm{cov}}=A(x)\land\neg C(B(x)),
+$$
+$$
+Q_{\mathrm{eq}}=C(u)\land\bigvee_j(F_j(u)\oplus F'_j(u)).
+$$
+Acceptance requires SAT for $Q_A$ and UNSAT for both remaining queries. Invalid syntax, unsupported operators, resource exhaustion, and UNKNOWN or timeout outcomes fail closed. A satisfiable coverage query identifies an actual legal design input omitted by the contract. A satisfiable equivalence query identifies a cut assignment admitted by the contract on which the replacement differs.
+
+The initial pilot uses exhaustive Boolean enumeration rather than an external solver and caps each enumerated input space at 16 variables. Enumeration is a finite-domain decision procedure only within those explicitly enforced bounds. It does not establish scalability to industrial cuts. A local conditional proof and deployment eligibility are recorded separately: eligibility additionally requires successful environment verification. A future netlist integration should additionally check the complete transformed design; that check would not replace either contract obligation.
+
+After semantic acceptance, a fixed cost function determines whether a candidate counts as an improvement. An equivalent but more expensive candidate is semantically valid and optimization-unsuccessful. Parsing failures, coverage failures, equivalence failures, and non-improvements must remain separate outcomes. A cost decrease measured on an expression is also not evidence of a physical area or delay decrease.
+
+Counterexample-driven contract refinement is **proposed, not implemented**. A coverage counterexample would require expanding the contract or changing the replacement; an equivalence counterexample might suggest a tighter contract. Tightening is legal only if the revised contract still covers every reachable assignment. Arbitrarily excluding a counterexample can erase real behavior. Every revised proposal must therefore rerun both obligations. This tension between coverage and local equivalence is the central search difficulty.
+
+## 5. Pilot Scope and Reporting Status
+
+The accompanying research scaffold is designed around deterministic candidates and small Boolean examples. It is intended to check the acceptance boundary before spending an LLM budget. Positive cases should include unconditional identities, mux simplification under an independently established selector, and simplification from correlated cut inputs. Negative cases should include a wrong replacement, an unjustified selector assumption, an unsatisfiable environment, an unsatisfiable contract, undeclared variables, and malformed syntax. Each case needs a known expected decision and, when rejected semantically, a reproducible witness.
+
+The selector example above is a required assumption-contamination negative control. An intentionally weakened validator that checks only conditional equivalence and satisfiability of the proposed contract should accept it. The full validator should reject it on coverage. This control measures whether the validation design catches the specific error, not whether any existing tool suffers from it. It must never be presented as the deployed acceptance policy.
+
+Executed pilot (14 October 2026). The fixed suite contains 27 local cases across absorption (5), distributivity (5), XOR cancellation (5), conditional mux simplification (5), intentionally invalid rewrites (5), and multi-output circuits (2). All 27 outcomes match their declared expectations: 21 VERIFIED and 6 REJECTED, with 412 assignments enumerated and 368 satisfying the supplied contracts. The three explicit context examples yield two eligible replacements and one rejection because the environment does not imply the proposed selector condition; their independently supplied whole-circuit checks agree. The checker test suite passes 56 of 56 checks, including malformed JSON, port errors, empty premises, and resource limits. These are curated implementation probes, not held-out optimization benchmarks. Runtime and model cost were not collected as performance measurements. Machine-readable reports and source SHA-256 digests accompany the artifact.
+
+For the 21 verified local fixtures, abstract structurally unique operator counts sum to 51 before and 17 after rewriting. Input and constant nodes have zero cost; not, and, or, xor, and mux each count as one operator, and identical ordered subexpressions are shared across outputs. These deliberately selected identities do not establish physical improvement or an expected optimization rate. Per-case values are retained instead of interpreting the aggregate as PPA.
+
+No numeric LLM success rate, synthesis improvement, solver speedup, or PPA reduction is currently available. All such result fields remain explicitly unmeasured. These successful pilot checks support a narrow statement: the implemented bounded checker behaves as intended on the stated cases. They do not establish theorem-to-code correspondence for every input, broad circuit coverage, novelty, or competitiveness. The final manuscript must replace this subsection with audited measurements and retain a precise account of what was actually implemented.
+
+## 6. Experimental Questions and Protocol
+
+The full evaluation should answer three questions. **RQ1:** Do explicit contracts improve accepted optimization under the same total compute and verification budget? **RQ2:** How much benefit comes from contract representation, model proposals, environmental context, and counterexample feedback separately? **RQ3:** How do correctness failures, runtime, and mapped quality change across cut size and circuit family?
+
+**Benchmarks and partitioning.** Use redistributable combinational designs spanning arithmetic, comparison, multiplexing, encoding/decoding, control, and mixed logic. Publish upstream revisions, licenses, preprocessing scripts, cut extraction rules, widths, depths, and gate counts. Group variants of a common design into one family before partitioning, so width-scaled or trivially renamed siblings cannot cross development and test sets. Fix development and held-out test families before prompt tuning. Include generated unseen structural variants and audit near duplicates. Report the unresolved risk that public source designs appeared in model pretraining; a test split alone does not eliminate that risk.
+
+The core experiment should start with $A=1$ and exploit only correlations proved through $B$. A separate environmental-assumption track may use nontrivial $A$ when its source and validity are independently documented. Never derive the trusted environment from a candidate that benefits from the restriction. Separate these tracks because extra environmental knowledge changes the problem presented to every baseline.
+
+**Baselines.** Include reproducible Yosys [4]/ABC [5] synthesis flows with documented optimization scripts and appropriate rewriting, refactoring, and resubstitution passes, followed by the same technology mapping. Include bounded non-LLM enumerative or stochastic search using the same cut representation, cost function, and checker. Include an LLM-plus-checker baseline that proposes replacements without an explicit contract; it should have access to the same legitimate circuit context and be checked against the same environment. A contract-free contextual baseline must be allowed to check $A(x)\Rightarrow F(B(x))=F'(B(x))$ directly, otherwise a difference in semantic freedom could be mistaken for a proposal advantage.
+
+Compare explicit contracts to a true-contract ablation, a context-aware replacement-only ablation, and a version without counterexample feedback. Match model version, context availability, sampling settings, and candidate limits. A no-coverage negative control belongs in diagnostic analysis only. If refinement remains unimplemented, omit its performance comparison and report the limitation instead of simulating results.
+
+**Budget accounting.** Predeclare both an end-to-end budget and a checker-query budget. Include prompt construction, model latency, retries, parsing, all rejected candidates, contract checks, replacement checks, and synthesis or mapping calls. Report wall time, available parallelism, CPU allocation, solver time, input/output tokens, and the provider price and date used for monetary cost. A single proposal can generate several queries, so equal proposal counts alone are insufficient. Give quality-versus-budget curves and matched stopping points; also report the non-model overhead and any offline training or tuning cost separately.
+
+**Quality and uncertainty.** Measure valid-candidate fraction, coverage failure rate, local-equivalence failure rate, accepted-improvement fraction, and best cost reached per design. Use multiple independent search seeds and report paired per-design differences with confidence intervals, including ties, failures, and timeouts. Treat circuit families as the grouping unit when estimating uncertainty; hundreds of correlated cuts do not provide hundreds of independent designs. Predeclare the primary metric and stopping rule to avoid selecting the most favorable budget after observing results.
+
+Separate abstract Boolean operator counts from technology-mapped area and delay and from post-placement-and-routing PPA. A mapped experiment must fix cell library, synthesis versions, corner, clock or delay constraints, output load, fanout assumptions, and mapping script. A physical experiment additionally needs reproducible placement/routing constraints and tools. Report area and delay jointly and state whether improvements meet the same timing target. Power requires an explicit activity model. No abstract gate reduction may be relabeled as silicon area, energy, or timing improvement.
+
+**Reproducibility and artifacts.** Publish prompts, exact model identifiers, generation dates, sampling parameters, redacted raw responses, parsed proposals, checker outcomes, counterexamples, seeds, and configuration files. Store a content hash for each design, environment, cut, and candidate. Provide a manifest linking every table row to the exact code revision and logs. Check that logged witnesses actually violate their claimed obligation. Record tool exit status and incomplete runs; never silently remove failures. Before submission, rerun the artifact from a clean environment, audit result aggregation, and prepare an anonymous review snapshot with identifying metadata removed.
+
+## 7. Related Work and Positioning
+
+Traditional logic synthesis already uses Boolean identities, rewriting, resubstitution, and care-set reasoning to optimize circuits. Yosys [4] and ABC [5] are essential implementation baselines rather than weak comparison points. Formal equivalence and compositional verification establish the semantics behind our two obligations, while counterexample-guided synthesis motivates the proposed feedback loop.
+
+Recent work makes generic LLM-plus-verification claims insufficient. Ares studies adaptive reasoning effort for PPA- and cost-aware RTL optimization with LLM agents [1]. Dr. RTL combines tool-grounded agentic optimization with critical-path analysis, parallel rewriting, sequential equivalence checking, and reusable skills [2]. RTL-OPT36 addresses the appropriate evaluation of RTL optimization [3]; only independently verified combinational subsets fit our present semantics. These papers provide motivation and comparison targets, but their reported results are not directly comparable with our bounded deterministic pilot.
+
+The final literature review must characterize the nearest contract-aware and don't-care-aware optimization systems and compare their assumptions directly. A new JSON format or a soundness proof assembled from standard substitution principles is not by itself a sufficient novelty claim. The intended research question is whether explicit contracts provide a measurable advantage over strong contextual search with equivalent semantic freedom and equal budgets. This draft does not assert that this question is unexplored.
+
+## 8. Limitations and Research Risks
+
+The current scope excludes sequential transformations, reset and initialization semantics, memory, arithmetic overflow beyond explicit bit-level encoding, analog behavior, and four-state HDL semantics. Encoding a design into the supported Boolean model is itself a trust boundary. Exhaustive enumeration scales exponentially and currently limits the size of both primary-input and cut-input spaces. Moving to SAT would require a validated encoding and independently reproducible solver configurations.
+
+The local theorem can miss optimizations whose correctness depends on downstream masking. Contracts can become as complex as the original circuit, increasing checking cost without improving search. A traditional optimizer may recover the same care sets more cheaply. Model-generated proposals may be mostly redundant with elementary rewrite libraries, and their token cost may outweigh any savings. Negative or null results on these questions should be reported.
+
+Security and correctness also depend on parser rejection rules and resource limits. The pilot is a research implementation, not a production verifier. Human reviewers must audit the specification, generated code, examples, claims, and bibliography before any submission. Venue compliance, anonymity, page count, and artifact availability remain final preparation tasks.
+
+## 9. Conclusion
+
+A contract-aware rewrite is sound only when its assumptions are proved to cover the original legal environment and its replacement is equivalent throughout that contract. This separation prevents a proposer from changing the verification problem through unsupported assumptions. The bounded pilot and experiment protocol make that claim inspectable. Whether explicit contracts improve practical circuit optimization remains an open empirical question that requires strong baselines, matched budgets, and reproducible measurements.
+
+## 10. Content Generated by AI
+
+Codex (GPT-6) assisted with the research direction, method proposal, mathematical derivation, manuscript drafting, and generation of the accompanying code and tests. Its outputs are preliminary and may contain errors or omissions. No actual LLM optimization study or physical-design result is claimed in this draft. **Pending human verification:** the human authors have not yet completed a comprehensive audit of the proof-to-implementation correspondence, source citations, experimental validity, or manuscript claims. Before submission, the authors must verify and revise all generated material and take responsibility for the final content. This disclosure must be updated to reflect the actual work performed and the applicable submission policy.
+
+## References
+
+[1] S. Cuyckens, M. Jivanescu, J. Yin, C. Fang, and M. Verhelst, “Ares: Adaptive Reasoning-Effort Steering for PPA- and Cost-Aware RTL Optimization with LLM Agents,” arXiv:2607.27879v1, 2026. https://arxiv.org/abs/2607.27879
+
+[2] W. Fang, Y. Lu, S. Liu, J. Wang, Z. Guo, J. He, F. Tu, and Z. Xie, “Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement,” arXiv:2604.14989v2, 2026. https://arxiv.org/abs/2604.14989
+
+[3] Y. Lu, S. Liu, H. Zhou, W. Fang, Q. Zhang, and Z. Xie, “A New Benchmark for the Appropriate Evaluation of RTL Code Optimization,” arXiv:2601.01765v1, 2026. https://arxiv.org/abs/2601.01765
+
+[4] YosysHQ, “Yosys Open SYnthesis Suite,” software repository, accessed Oct. 14, 2026. https://github.com/YosysHQ/yosys
+
+[5] Berkeley ABC, “ABC: System for Sequential Logic Synthesis and Formal Verification,” software repository, accessed Oct. 14, 2026. https://github.com/berkeley-abc/abc
