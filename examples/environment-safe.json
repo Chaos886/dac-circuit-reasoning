@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "inputs": [
+    "u",
+    "v",
+    "x",
+    "q"
+  ],
+  "boundary": {
+    "a": {
+      "op": "input",
+      "name": "u"
+    },
+    "b": {
+      "op": "input",
+      "name": "v"
+    },
+    "s": {
+      "op": "const",
+      "value": true
+    }
+  },
+  "assumption": {
+    "op": "const",
+    "value": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "mux-local-contract",
+  "proposer": "deterministic-pilot",
+  "inputs": [
+    "a",
+    "b",
+    "s"
+  ],
+  "reference": {
+    "y": {
+      "op": "mux",
+      "sel": {
+        "op": "input",
+        "name": "s"
+      },
+      "whenTrue": {
+        "op": "input",
+        "name": "a"
+      },
+      "whenFalse": {
+        "op": "input",
+        "name": "b"
+      }
+    }
+  },
+  "candidate": {
+    "y": {
+      "op": "input",
+      "name": "a"
+    }
+  },
+  "contract": {
+    "op": "input",
+    "name": "s"
+  }
+}
