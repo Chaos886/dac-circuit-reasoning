@@ -1,0 +1,148 @@
+{
+  "suite": "single-clock-state-trace",
+  "tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "results": [
+    {
+      "name": "pipeline: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "counter: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "accumulator: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "handshake: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "buffer: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "edge_detector: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "simultaneous updates use old q, not the newly assigned q",
+      "status": "PASS"
+    },
+    {
+      "name": "reset dominates data and clears both pipeline registers",
+      "status": "PASS"
+    },
+    {
+      "name": "exact reference scores all cycles and the final state",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong state persists without reset even with valid later transitions",
+      "status": "PASS"
+    },
+    {
+      "name": "synchronous reset can repair an incorrect prefix",
+      "status": "PASS"
+    },
+    {
+      "name": "pipeline output initially masks q error and exposes it next cycle",
+      "status": "PASS"
+    },
+    {
+      "name": "output errors are scored independently of correct hidden state",
+      "status": "PASS"
+    },
+    {
+      "name": "predictions cannot replace the trusted transition function",
+      "status": "PASS"
+    },
+    {
+      "name": "task hash detects a changed stimulus despite an unchanged ID",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical task hash ignores object field order",
+      "status": "PASS"
+    },
+    {
+      "name": "prepared evaluator is unaffected by subsequent task mutations",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing initial bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing input at one edge",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unknown initial state",
+      "status": "PASS"
+    },
+    {
+      "name": "reject duplicate state/input bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject undeclared next-state signal",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unsupported clock semantics",
+      "status": "PASS"
+    },
+    {
+      "name": "reject excessive horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject empty horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unsupported expression operator",
+      "status": "PASS"
+    },
+    {
+      "name": "reject excessive bit count",
+      "status": "PASS"
+    },
+    {
+      "name": "reject omitted prediction",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing row",
+      "status": "PASS"
+    },
+    {
+      "name": "reject extra row",
+      "status": "PASS"
+    },
+    {
+      "name": "reject misnumbered cycles",
+      "status": "PASS"
+    },
+    {
+      "name": "reject numeric bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unknown output bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject invented internal signal",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid intervention cycle is refused",
+      "status": "PASS"
+    }
+  ]
+}

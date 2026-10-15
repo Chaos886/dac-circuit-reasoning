@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-15",
+  "checks": [
+    {
+      "name": "original-pilot",
+      "exitCode": 0
+    },
+    {
+      "name": "synthetic-trace-replay",
+      "exitCode": 0,
+      "taskCount": 48,
+      "exactTraces": 48,
+      "invalidPredictions": 0
+    },
+    {
+      "name": "benchmark-adapter-replay",
+      "exitCode": 0,
+      "taskCount": 2,
+      "exactTraces": 2,
+      "invalidPredictions": 0
+    },
+    {
+      "name": "missing-prediction-denominator",
+      "exitCode": 1,
+      "taskCount": 48,
+      "invalidPredictions": 1,
+      "exactTraces": 47
+    }
+  ]
+}

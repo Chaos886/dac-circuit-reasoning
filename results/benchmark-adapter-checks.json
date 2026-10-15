@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-15",
+  "checks": [
+    {
+      "taskId": "verilogeval-Prob107-fsm1s-h8",
+      "assignments": 8,
+      "status": "PASS"
+    },
+    {
+      "taskId": "rtllm-right-shifter-h8",
+      "assignments": 512,
+      "status": "PASS"
+    }
+  ],
+  "status": "CANDIDATE_ADAPTERS_ONLY",
+  "simulatorValidated": false,
+  "evidence": "520 one-step comparisons with independent equations; no HDL execution, upstream benchmark score or LLM run"
+}

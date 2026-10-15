@@ -13,6 +13,6 @@
 
 本项目候选分类：EDA5.7 AI/ML techniques for synthesis；若主要贡献转为证明方法，则考虑EDA2.3 Formal and semi-formal verification。分类以最终贡献为准。
 
-官方明确按完成的论文评审，preliminary submission处于不利地位。本项目目前是研究初稿，不能直接作为完成稿提交。GitHub私有仓库是研究工作区，不能把带账号身份的仓库链接直接放入双盲稿。
+官方明确按完成的论文评审，preliminary submission处于不利地位。本项目目前是研究初稿，不能直接作为完成稿提交。GitHub 是研究工作区，不能把带账号身份的仓库链接直接放入双盲稿。2026-10-15 经 GitHub API 核对，仓库当前为公开；此前“私有”的记录不准确。
 
 投稿前重新核对官网、模板、日期与作者/COI信息。当前 main.tex 是IEEE会议格式草稿，编译成功不代表完成匿名与版面审查。AI披露必须保留并由人类作者核实。

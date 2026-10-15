@@ -1,0 +1,402 @@
+
+> dac-circuit-reasoning@0.2.0 test
+> node tests/checker.test.mjs && node tests/state_trace.test.mjs && node tests/benchmark_adapters.test.mjs
+
+{
+  "suite": "bounded-two-state-circuit-checker",
+  "tests": 56,
+  "passed": 56,
+  "failed": 0,
+  "results": [
+    {
+      "name": "identity exhaustively checks all assignments",
+      "status": "PASS"
+    },
+    {
+      "name": "conditional mux rewrite checks only satisfying inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "dropping the mux contract exposes a reproducible counterexample",
+      "status": "PASS"
+    },
+    {
+      "name": "counterexample obeys a nontrivial contract",
+      "status": "PASS"
+    },
+    {
+      "name": "unsatisfiable premise is rejected even for identical circuits",
+      "status": "PASS"
+    },
+    {
+      "name": "false constant premise is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "zero-input constant identity has one valid assignment",
+      "status": "PASS"
+    },
+    {
+      "name": "zero-input constant mismatch returns an empty assignment",
+      "status": "PASS"
+    },
+    {
+      "name": "multi-output mismatch names the broken output",
+      "status": "PASS"
+    },
+    {
+      "name": "identical ordered subexpressions are deduplicated across outputs",
+      "status": "PASS"
+    },
+    {
+      "name": "commuted expressions remain distinct structural keys",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: duplicate input ports",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: undeclared reference input",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: undeclared candidate input",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: undeclared contract input",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: different output interface",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: input/output collision",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: empty output interface",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: invalid input identifier",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: reserved input identifier",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: prototype-sensitive input identifier",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: non-Boolean constant",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: numeric unknown operation",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: array-coerced operation",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: unknown AST field",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: missing AST child",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: unknown top-level field",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: explicit null contract",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: missing schemaVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: custom prototype",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: class instance",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid request fails closed: cyclic AST",
+      "status": "PASS"
+    },
+    {
+      "name": "null request fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "assignment budget refuses incomplete checking",
+      "status": "PASS"
+    },
+    {
+      "name": "more than 16 input ports fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "16 input ports are exhaustively supported",
+      "status": "PASS"
+    },
+    {
+      "name": "evaluation budget fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "AST depth budget fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "AST node budget fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid or enlarged limits are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "restricted export includes two-state caveat and all outputs",
+      "status": "PASS"
+    },
+    {
+      "name": "restricted export rejects unsafe module names",
+      "status": "PASS"
+    },
+    {
+      "name": "all 27 fixed fixtures match their declared statuses",
+      "status": "PASS"
+    },
+    {
+      "name": "local proof alone does not permit unsafe deployment",
+      "status": "PASS"
+    },
+    {
+      "name": "constant boundary discharges the independent contract obligation",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed external assumption discharges contract without mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "unsatisfiable external assumption never permits deployment",
+      "status": "PASS"
+    },
+    {
+      "name": "boundary must map every local input exactly",
+      "status": "PASS"
+    },
+    {
+      "name": "boundary cannot refer to undeclared external inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "false local rewrite never becomes eligible under a valid environment",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit whole-circuit checks agree with safe and unsafe examples",
+      "status": "PASS"
+    },
+    {
+      "name": "external input may share a local input name",
+      "status": "PASS"
+    },
+    {
+      "name": "external obligation-like port name is handled without collision",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON interface accepts a valid candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON interface rejects malformed candidate or environment",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON interface preserves independent environment eligibility",
+      "status": "PASS"
+    }
+  ]
+}
+{
+  "suite": "single-clock-state-trace",
+  "tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "results": [
+    {
+      "name": "pipeline: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "counter: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "accumulator: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "handshake: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "buffer: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "edge_detector: all one-step assignments match an independent specification",
+      "status": "PASS"
+    },
+    {
+      "name": "simultaneous updates use old q, not the newly assigned q",
+      "status": "PASS"
+    },
+    {
+      "name": "reset dominates data and clears both pipeline registers",
+      "status": "PASS"
+    },
+    {
+      "name": "exact reference scores all cycles and the final state",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong state persists without reset even with valid later transitions",
+      "status": "PASS"
+    },
+    {
+      "name": "synchronous reset can repair an incorrect prefix",
+      "status": "PASS"
+    },
+    {
+      "name": "pipeline output initially masks q error and exposes it next cycle",
+      "status": "PASS"
+    },
+    {
+      "name": "output errors are scored independently of correct hidden state",
+      "status": "PASS"
+    },
+    {
+      "name": "predictions cannot replace the trusted transition function",
+      "status": "PASS"
+    },
+    {
+      "name": "task hash detects a changed stimulus despite an unchanged ID",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical task hash ignores object field order",
+      "status": "PASS"
+    },
+    {
+      "name": "prepared evaluator is unaffected by subsequent task mutations",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing initial bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing input at one edge",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unknown initial state",
+      "status": "PASS"
+    },
+    {
+      "name": "reject duplicate state/input bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject undeclared next-state signal",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unsupported clock semantics",
+      "status": "PASS"
+    },
+    {
+      "name": "reject excessive horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject empty horizon",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unsupported expression operator",
+      "status": "PASS"
+    },
+    {
+      "name": "reject excessive bit count",
+      "status": "PASS"
+    },
+    {
+      "name": "reject omitted prediction",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing row",
+      "status": "PASS"
+    },
+    {
+      "name": "reject extra row",
+      "status": "PASS"
+    },
+    {
+      "name": "reject misnumbered cycles",
+      "status": "PASS"
+    },
+    {
+      "name": "reject numeric bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unknown output bit",
+      "status": "PASS"
+    },
+    {
+      "name": "reject invented internal signal",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid intervention cycle is refused",
+      "status": "PASS"
+    }
+  ]
+}
+{
+  "date": "2026-10-15",
+  "checks": [
+    {
+      "taskId": "verilogeval-Prob107-fsm1s-h8",
+      "assignments": 8,
+      "status": "PASS"
+    },
+    {
+      "taskId": "rtllm-right-shifter-h8",
+      "assignments": 512,
+      "status": "PASS"
+    }
+  ],
+  "status": "CANDIDATE_ADAPTERS_ONLY",
+  "simulatorValidated": false,
+  "evidence": "520 one-step comparisons with independent equations; no HDL execution, upstream benchmark score or LLM run"
+}

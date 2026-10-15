@@ -1,14 +1,16 @@
 {
   "name": "dac-circuit-reasoning",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Research draft and bounded Boolean circuit verification pilot",
+  "description": "Circuit reasoning research: bounded rewrite checking and clock-cycle state trace diagnostics",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node tests/checker.test.mjs",
-    "pilot": "node src/run_pilot.mjs --out results"
+    "test": "node tests/checker.test.mjs && node tests/state_trace.test.mjs && node tests/benchmark_adapters.test.mjs",
+    "pilot": "node src/run_pilot.mjs --out results",
+    "trace:pilot": "node src/run_trace_pilot.mjs --out results",
+    "trace:score": "node src/score_trace.mjs"
   }
 }

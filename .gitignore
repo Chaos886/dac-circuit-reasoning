@@ -6,3 +6,4 @@ node_modules/
 *.out
 *.synctex.gz
 .DS_Store
+results/github-sync-status.json

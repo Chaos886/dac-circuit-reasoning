@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "accessed": "2026-10-15",
+  "reviewType": "targeted benchmark scoping, not a systematic literature review",
+  "sources": [
+    {
+      "repo": "NVlabs/verilog-eval",
+      "sha": "c498220d0a52248f8e3fdffe279075215bde2da6",
+      "accessed": "2026-10-15",
+      "source": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/README.md",
+      "readmeSha256": "7c73b9cf436ffa221ffa38015623d6224afc0f29ebe21314e75110d90fe61fa7",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/LICENSE",
+      "licenseSha256": "57ba983be500462670e5e6de0655ed6fb0a30b4b17be8030ec935bb514b562d1",
+      "nativeTask": "RTL code completion and specification-to-RTL generation",
+      "integrationStatus": "source-audited; native evaluation not run",
+      "caution": "Repository license is recorded; inspect per-file and third-party dataset terms before redistribution."
+    },
+    {
+      "repo": "hkust-zhiyao/RTLLM",
+      "sha": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+      "accessed": "2026-10-15",
+      "source": "https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/README.md",
+      "readmeSha256": "507f8ea148ebf29e1d3fa1d5e6c9c99b3a603b770b2faeb014e2344a731b4c24",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/LICENSE",
+      "licenseSha256": "a32206bcfbf5d6bb23be8a876de424d8a8d2a0e30a9adc9f8e1b3139fada9176",
+      "nativeTask": "RTL generation, testbench functionality and post-synthesis quality",
+      "integrationStatus": "source-audited; native evaluation not run",
+      "caution": "Repository license is recorded; inspect per-file and third-party dataset terms before redistribution."
+    },
+    {
+      "repo": "NVlabs/FVEval",
+      "sha": "141afe7dcf03a0b86547b94657d9d610b6087724",
+      "accessed": "2026-10-15",
+      "source": "https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/README.md",
+      "readmeSha256": "bf6a77d55745712e44b6991ef3a9ea9b5ea6f3aa9ef638fb638b7c5b00e60326",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://github.com/NVlabs/FVEval/blob/141afe7dcf03a0b86547b94657d9d610b6087724/LICENSE",
+      "licenseSha256": "68959a90d54075ca84b75b8b56b41a4efb25a655763c05c1effc884879ee58d4",
+      "nativeTask": "NL2SVA-Human, NL2SVA-Machine and Design2SVA",
+      "integrationStatus": "source-audited; native evaluation not run",
+      "caution": "Repository license is recorded; inspect per-file and third-party dataset terms before redistribution."
+    }
+  ],
+  "selectedDesigns": [
+    {
+      "source": "verilog-eval",
+      "path": "dataset_code-complete-iccad2023/Prob031_dff_ref.sv",
+      "status": "excluded from initial-known-state track",
+      "note": "Explicit initial q = X; requires a warm-up boundary or four-state scoring.",
+      "sourceUrl": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_code-complete-iccad2023/Prob031_dff_ref.sv",
+      "sourceSha256": "fbfa1604c31f03dca7217b6d4f2ce1b67e85898ec94195ea3dc460868a186e40"
+    },
+    {
+      "source": "verilog-eval",
+      "path": "dataset_code-complete-iccad2023/Prob075_counter_2bc_ref.sv",
+      "status": "deferred",
+      "note": "Asynchronous active-high reset to 1; do not flatten into synchronous reset.",
+      "sourceUrl": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_code-complete-iccad2023/Prob075_counter_2bc_ref.sv",
+      "sourceSha256": "eb3bcfc472f3979166157b577fa6ecae67722ae22eafd409a57b35c92590d0b7"
+    },
+    {
+      "source": "verilog-eval",
+      "path": "dataset_code-complete-iccad2023/Prob085_shift4_ref.sv",
+      "status": "deferred",
+      "note": "Asynchronous reset and load-over-enable priority need event-level validation.",
+      "sourceUrl": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_code-complete-iccad2023/Prob085_shift4_ref.sv",
+      "sourceSha256": "35074d1c6ac73241a4acdcc48712e78e83f571f4016949c7de33c0f6ed3c4564"
+    },
+    {
+      "source": "verilog-eval",
+      "path": "dataset_code-complete-iccad2023/Prob107_fsm1s_ref.sv",
+      "status": "manual candidate adapter",
+      "note": "Synchronous reset to state B=1; trusted initial state is AFTER an extra reset preamble; in maps to in_bit.",
+      "sourceUrl": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_code-complete-iccad2023/Prob107_fsm1s_ref.sv",
+      "sourceSha256": "1d8b86049ccf6097e33d0b8f9aefb0c387e8e6eb5405c00e380ab10ece0fab0d"
+    },
+    {
+      "source": "RTLLM",
+      "path": "Control/Counter/counter_12/verified_counter_12.v",
+      "status": "deferred",
+      "note": "Asynchronous active-low reset; modulo-12 behavior, not generic binary wrap.",
+      "sourceUrl": "https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/Control/Counter/counter_12/verified_counter_12.v",
+      "sourceSha256": "e3551f7d82fa522f9e9afe01a2c4ff35bd61143d395f490e17d340cb16a6ae04"
+    },
+    {
+      "source": "RTLLM",
+      "path": "Control/Finite State Machine/fsm/verified_fsm.v",
+      "status": "deferred",
+      "note": "Asynchronous reset, partially specified next-state case, combinational NBA output; requires source simulator audit.",
+      "sourceUrl": "https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/Control/Finite%20State%20Machine/fsm/verified_fsm.v",
+      "sourceSha256": "ea1e64be378b21e14efa99484ed4763237328cb5def9fd51fee8f93d4d959c2d"
+    },
+    {
+      "source": "RTLLM",
+      "path": "Memory/Shifter/right_shifter/verified_right_shifter.v",
+      "status": "manual candidate adapter",
+      "note": "Explicit initial q=0; ordered nonblocking assignments shift q right then write q[7]=d; preserve unsigned 8-bit state.",
+      "sourceUrl": "https://github.com/hkust-zhiyao/RTLLM/blob/51ed553d0ffd32797a1a0a13e051656bf302c81f/Memory/Shifter/right_shifter/verified_right_shifter.v",
+      "sourceSha256": "0a3746d0e25ec9ec94cdf9e78bd781f8b3657a2a3b8393985d5d0c5640671364"
+    }
+  ],
+  "adapterValidation": {
+    "hdlSimulation": false,
+    "formalSourceEquivalence": false,
+    "upstreamBenchmarkResults": false
+  }
+}

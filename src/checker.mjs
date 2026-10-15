@@ -114,6 +114,28 @@ function compile(node, indices) {
   if (node.op === 'or') return assignment => left(assignment) || right(assignment);
   return assignment => left(assignment) !== right(assignment);
 }
+
+/** Compile a bounded Boolean function for repeated, strictly typed evaluation.
+ * This evaluates supplied assignments only; it is not an equivalence proof.
+ * Compiled closures and copied interfaces do not retain mutable caller ASTs.
+ */
+export function compileBooleanFunction(inputs, expressions) {
+  const circuit = validate({ schemaVersion: 1, id: 'function', proposer: 'trusted-driver',
+    inputs, reference: expressions, candidate: expressions }, LIMITS);
+  if (circuit.inputs.length > LIMITS.maxInputs) fail('input limit exceeded');
+  const names = [...circuit.inputs], outputs = [...circuit.outputs];
+  const indices = new Map(names.map((name, index) => [name, index]));
+  const evaluators = outputs.map(name => compile(circuit.reference[name], indices));
+  return values => {
+    keys(values, names, names, 'assignment');
+    let packed = 0;
+    names.forEach((name, index) => {
+      if (typeof values[name] !== 'boolean') fail('assignment.' + name + ' must be Boolean');
+      if (values[name]) packed += 2 ** index;
+    });
+    return Object.fromEntries(outputs.map((name, index) => [name, evaluators[index](packed)]));
+  };
+}
 function stats(outputs) {
   const signatures = new Map();
   const gates = new Set();
